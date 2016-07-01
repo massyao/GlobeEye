@@ -1,0 +1,7 @@
+{
+  "name": "GlobeEye",
+  "version": "0.0.1",
+  "description": "A geospatial representation of tweet data collected from the twitter stream api",
+  "author": "massyao",
+  "license": "MIT"
+}
