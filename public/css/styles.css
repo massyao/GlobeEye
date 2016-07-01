@@ -1,0 +1,64 @@
+html, body {
+	width: 100%;
+	height:100%;
+	margin:0px; 
+	border:0px;
+    padding:0px;    
+}
+
+#twitter-tour {
+	position: absolute;
+	top: 3px;
+	left: 0px;
+	right: 0px;
+	bottom: 3px;
+}
+
+.twitter-tour-canvas {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+.canvas {
+	background-color: #15242d;
+	border-radius: 0px;
+}
+
+#text-section {
+	top: 30px;
+	left: 70%;
+	right:10px;
+	position:absolute;
+	z-index:999;
+	color: orange;
+	font-size : 2em;
+	border-radius: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	max-width: 90%;
+	word-wrap: break-word;
+	display:none;
+}
+
+#avatar {
+	position: absolute;
+	right: 31%;
+	top: 43px;
+	max-width: 10%;
+	max-height:10%; 
+	border: 1px solid #55ACEE;
+	border-radius: 5px;
+	display:none;
+}
+
+#media-image {
+	position: absolute;
+	left: 70%;
+	top: 42%;
+	max-width: 29%;
+	max-height:57%; 
+	border: 1px solid #55ACEE;
+	border-radius: 3px;
+	display:none;
+}
