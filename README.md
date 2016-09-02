@@ -3,7 +3,7 @@ GlobeEye
 
 A geospatial representation of tweet data collected from the twitter stream api.
 
-[Check it out!](https://github.com/massyao/GlobeEye)
+[Check it out!](http://amormaid.tk)
 For best visual results view use Chrome (it may take a few secconds for the first tweets to load).
 
 tweetsFilter for this project is written in node.js and can be found [here](https://github.com/massyao/GlobeEye/tweetsFilter).
