@@ -252,7 +252,7 @@ define(function(require){
 				
 				$avatar.load(function(){
 					$avatar.show();	
-					$textSection.html("<p>" + dataToRender.text + "<a href='" + tweetlink + "'> @</a></p>");
+					$textSection.html("<p>" + dataToRender.text + "<a href='" + tweetlink + "' target=blank> @</a></p>");
 					$textSection.show();
 				});
 			})();		

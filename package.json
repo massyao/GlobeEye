@@ -3,5 +3,14 @@
   "version": "0.0.1",
   "description": "A geospatial representation of tweet data collected from the twitter stream api",
   "author": "massyao",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "compress": "^0.99.0",
+    "cors": "^2.8.4",
+    "json": "^9.0.6",
+    "twit": "^2.2.9",
+    "urlencode": "^1.1.0",
+	"express":"^4.15.4",
+	
+  }
 }
