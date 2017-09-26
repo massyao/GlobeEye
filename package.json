@@ -1,16 +1,21 @@
 {
-  "name": "GlobeEye",
-  "version": "0.0.1",
-  "description": "A geospatial representation of tweet data collected from the twitter stream api",
-  "author": "massyao",
-  "license": "MIT",
-  "dependencies": {
-    "compress": "^0.99.0",
-    "cors": "^2.8.4",
-    "json": "^9.0.6",
-    "twit": "^2.2.9",
-    "urlencode": "^1.1.0",
-	"express":"^4.15.4",
-	
-  }
+	"name": "GlobeEye",
+	"version": "0.0.1",
+	"description": "A geospatial representation of tweet data collected from the twitter stream api",
+	"author": {
+		"name": "massyao",
+		"email": "massyao@126.com",
+		"url": "http://amormaid.tk"
+	},
+	"license": "MIT",
+	"dependencies": {
+		"apiai": "^4.0.3",
+		"compress": "^0.99.0",
+		"cors": "^2.8.4",
+		"express": "^4.15.4",
+		"json": "^9.0.6",
+		"socket.io": "^2.0.3",
+		"twit": "^2.2.9",
+		"urlencode": "^1.1.0"
+	}
 }

@@ -6,6 +6,7 @@ requirejs.config({
 		content:'js/content',
 		jquery:'js/jquery',
 		topojson:'js/topojson',
+		socket:'js/socket.io'
 	},
 	deps: [ 'jquery', 'content','topojson'],
 });
