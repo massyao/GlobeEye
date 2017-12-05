@@ -55,7 +55,7 @@ define(function(require){
 		textMetrics,
 		textHeight,
 		FONT_HEIGHT = 128;	
-	
+
 	//    D3  Geo initialize
 	projection = d3.geo.orthographic().scale(radius-2)
 							.translate([parseInt(width*0.35), parseInt(height / 2)]).clipAngle(90);
@@ -67,7 +67,109 @@ define(function(require){
 							.attr("width", width)
 							.attr("height", height);
 	context    = canvas.node().getContext("2d");
-	
+//////////////////////////////////////////////
+/////////// star back ground//////////////
+/////////////////////////////////////////////
+/*
+	var   w =width ,
+	  h = height ,
+	  hue = 217,
+	  stars = [],
+	  count = 0,
+	  maxStars = 1200;
+
+	var canvas2 = document.createElement('canvas'),
+	  ctx2 = canvas2.getContext('2d');
+	canvas2.width = 100;
+	canvas2.height = 100;
+	var half = canvas2.width / 2,
+	  gradient2 = ctx2.createRadialGradient(half, half, 0, half, half, half);
+	gradient2.addColorStop(0.025, '#fff');
+	gradient2.addColorStop(0.1, 'hsl(' + hue + ', 61%, 33%)');
+	gradient2.addColorStop(0.25, 'hsl(' + hue + ', 64%, 6%)');
+	gradient2.addColorStop(1, 'transparent');
+
+	ctx2.fillStyle = gradient2;
+	ctx2.beginPath();
+	ctx2.arc(half, half, half, 0, Math.PI * 2);
+	ctx2.fill();
+
+	// End cache
+
+	function random(min, max) {
+	  if (arguments.length < 2) {
+		max = min;
+		min = 0;
+	  }
+
+	  if (min > max) {
+		var hold = max;
+		max = min;
+		min = hold;
+	  }
+
+	  return Math.floor(Math.random() * (max - min + 1)) + min;
+	}
+
+	function maxOrbit(x, y) {
+	  var max = Math.max(x, y),
+		diameter = Math.round(Math.sqrt(max * max + max * max));
+	  return diameter / 2;
+	}
+
+	var Star = function() {
+
+	  this.orbitRadius = random(maxOrbit(w, h));
+	  this.radius = random(60, this.orbitRadius) / 12;
+	  this.orbitX = w / 2;
+	  this.orbitY = h / 2;
+	  this.timePassed = random(0, maxStars);
+	  this.speed = random(this.orbitRadius) / 900000;
+	  this.alpha = random(2, 10) / 10;
+
+	  count++;
+	  stars[count] = this;
+	}
+
+	Star.prototype.draw = function() {
+	  var x = Math.sin(this.timePassed) * this.orbitRadius + this.orbitX,
+		y = Math.cos(this.timePassed) * this.orbitRadius + this.orbitY,
+		twinkle = random(10);
+
+	  if (twinkle === 1 && this.alpha > 0) {
+		this.alpha -= 0.05;
+	  } else if (twinkle === 2 && this.alpha < 1) {
+		this.alpha += 0.05;
+	  }
+
+	  context.globalAlpha = this.alpha;
+	  context.drawImage(canvas2, x - this.radius / 2, y - this.radius / 2, this.radius, this.radius);
+	  this.timePassed += this.speed;
+	}
+
+	for (var i = 0; i < maxStars; i++) {
+	  new Star();
+	}
+
+	function animation() {
+	  context.globalCompositeOperation = 'source-over';
+	  context.globalAlpha = 0.8;
+	  context.fillStyle = 'hsla(' + hue + ', 64%, 6%, 1)';
+	  context.fillRect(0, 0, w, h)
+
+	  context.globalCompositeOperation = 'lighter';
+	  for (var i = 1, l = stars.length; i < l; i++) {
+		stars[i].draw();
+	  };
+
+	  window.requestAnimationFrame(animation);
+	}
+animation();
+*/	
+
+///////////////////////////////////////////
+//////////star back ground/end ///////
+//////////////////////////////////////////
 	//  depict
 	d3.json("data/world-110m.json", function(error, world) {
 		sphere = {type: "Sphere"};
@@ -79,6 +181,7 @@ define(function(require){
 
 		//  rotate
 		d3.timer(function() {
+            
 			//angle = velocity * (Date.now() - then);
 			angle = angle_cache + 0.005*velocity_index * (Date.now() - then);
 			then = Date.now();
@@ -221,7 +324,10 @@ define(function(require){
 			var url = window.location.protocol + '//104.224.166.80:80';
 		}
 		*/
-		var url = window.location.protocol + '//104.224.166.80';
+        
+        //  
+		//var url = window.location.href;
+        var url = window.location.protocol + '//67.218.144.152';
 		var socket = io.connect(url);
 		socket.emit('tweets_request', { 'new': 'data_request !' });
 		socket.on('tweets_response',function(data){
@@ -231,6 +337,18 @@ define(function(require){
 				if( tweetStats.length < 10) {	
 					for(var j=0;j<data.length;j++){
 						tweetStats.push(data[j]);
+                        preload_img(data[j].user.profile_image_url_https);
+						if( data[j].entities && data[j].entities.media && data[j].entities.media.length ){
+                            // preload img      
+                            preload_img(data[j].user.profile_image_url_https);
+                            if( window.location.protocol == 'http:'){
+                                console.log("loading img ");
+                                preload_img(data[j].entities.media[0]['media_url']);
+                            } else {
+                                preload_img(data[j].entities.media[0]['media_url_https']);
+                            }
+                            
+						}
 					}
 				}else{
 					for(var k=0;k<data.length;k++){
@@ -239,6 +357,15 @@ define(function(require){
 						}else  */
 						if( data[k].entities && data[k].entities.media && data[k].entities.media.length ){
 							tweetStats.push(data[k]);
+                            // preload img      
+                            preload_img(data[k].user.profile_image_url_https);
+                            if( window.location.protocol == 'http:'){
+                                console.log("loading img ");
+                                preload_img(data[k].entities.media[0]['media_url']);
+                            } else {
+                                preload_img(data[k].entities.media[0]['media_url_https']);
+                            }
+                            
 						}
 					}
 				}	
@@ -249,6 +376,27 @@ define(function(require){
 	
 	renderData();
 	makeDataRequest_socket();
+    
+
+//  preload img 
+
+function preload_img(img_url){
+    
+    var newimages=new Image();
+    newimages.src=img_url;
+    newimages.onload=function(){
+        console.log(img_url+" loaded !");
+    }
+    newimages.onerror=function(){
+        console.log(img_url+" load error !");
+    }
+}
+// preload img end  
+    
+    
+    
+    
+    
 /////////////////////////////////////////
 //  speech interface
 ////////////////////////////////////////
