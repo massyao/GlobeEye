@@ -81,6 +81,7 @@ var twitter = new Twit({
 });
 
 var stream;
+let  settimeout_id;
 /*
 function handler (req, res) {
   fs.readFile(__dirname + '/index.html',
@@ -96,20 +97,22 @@ function handler (req, res) {
 }
 */
 function io_socket(socket) {
-		var tweetPayload = [];
-		// stream  turn on  and  turn off  at  61 seconds later
-		if(!tweet_stream_staus){
-			stream = twitter.stream('statuses/filter', { locations: [ '-180','-90','180','90' ] });
-			tweet_stream_staus = true;
-			console.log("stream open !");
-			setTimeout(function(){
-					stream.stop();
-					tweet_stream_staus = false;
-					console.log("stream stop !");
-					socket.emit('tweets_response',tweetPayload);
-			},61000);
-		}
-		
+    var tweetPayload = [];
+    // stream  turn on  and  turn off  at  61 seconds later
+    if(!tweet_stream_staus){
+        stream = twitter.stream('statuses/filter', { locations: [ '-180','-90','180','90' ] });
+        tweet_stream_staus = true;
+        console.log("stream open !");
+
+    }
+    clearTimeout(settimeout_id);
+    settimeout_id = setTimeout(function(){
+        stream.stop();
+        tweet_stream_staus = false;
+        console.log("stream stop !");
+        socket.emit('tweets_response',tweetPayload);
+    },61000);
+    
 	socket.on('tweets_request',function () {
 		stream.on('tweet', function (tweet) {
 		
@@ -138,9 +141,15 @@ io.on('connection', io_socket);
 ios.on('connection', io_socket);
 
 io.on('disconnect',function(){
+    stream.stop();
+    tweet_stream_staus = false;
+    console.log("stream stop !");
 	console.log('socket disconnect ;');
 });
 ios.on('disconnect',function(){
+    stream.stop();
+    tweet_stream_staus = false;
+    console.log("stream stop !");
 	console.log('socket disconnect;');
 });
 // START SERVER
