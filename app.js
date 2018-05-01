@@ -103,17 +103,8 @@ function io_socket(socket) {
         stream = twitter.stream('statuses/filter', { locations: [ '-180','-90','180','90' ] });
         tweet_stream_staus = true;
         console.log("stream open !");
-
-    }
-    clearTimeout(settimeout_id);
-    settimeout_id = setTimeout(function(){
-        stream.stop();
-        tweet_stream_staus = false;
-        console.log("stream stop !");
-        socket.emit('tweets_response',tweetPayload);
-    },61000);
-    
-	socket.on('tweets_request',function () {
+        
+        
 		stream.on('tweet', function (tweet) {
 		
 			if(tweetPayload.length > 19 ) {
@@ -131,9 +122,21 @@ function io_socket(socket) {
 		
 		stream.on('disconnect', function (disconnectMessage) {
 			stream.stop();
+            tweet_stream_staus = false;
 			console.log("disconnected ,so stream stop ~");
 			socket.emit('tweets_response',tweetPayload);
 		});
+    }
+    clearTimeout(settimeout_id);
+    settimeout_id = setTimeout(function(){
+        stream.stop();
+        tweet_stream_staus = false;
+        console.log("stream stop !");
+        socket.emit('tweets_response',tweetPayload);
+    },61000);
+    
+	socket.on('tweets_request',function () {
+        
 	});
 }
 
