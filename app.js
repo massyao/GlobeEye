@@ -14,8 +14,8 @@ const  json = require('json');
 //const server = require('http').createServer(app);
 const  http = require('http');
 const  https = require('https');
-const  privateKey  = fs.readFileSync('/var/www/html/privatekey.pem', 'utf8');
-const  certificate = fs.readFileSync('/var/www/html/certificate.pem', 'utf8');
+const  privateKey  = fs.readFileSync('./privatekey.pem', 'utf8');
+const  certificate = fs.readFileSync('./certificate.pem', 'utf8');
 const  credentials = {key: privateKey, cert: certificate};
 const  httpServer = http.createServer(app);
 const  httpsServer = https.createServer(credentials, app);
@@ -23,8 +23,8 @@ const  httpsServer = https.createServer(credentials, app);
 const io = require('socket.io')(httpServer);
 const ios = require('socket.io')(httpsServer);
 
-const PORT = 80;
-const SSLPORT = 443;
+const PORT = 1080;
+const SSLPORT = 1443;
 
 var  tweet_stream_staus = false;
 //var  socket_staus = false ;
@@ -38,37 +38,7 @@ httpsServer.listen(SSLPORT, function() {
     console.log('HTTPS Server is running on:  ', SSLPORT);
 });
 
-// Welcome
-/*
-app.get('/', function(req, res) {
-    if(req.protocol === 'https') {
-        res.status(200).send('Welcome to Safety Land!');
-    }
-    else {
-        res.status(200).send('Welcome!');
-    }
-});
-*/
-/*
-import https from 'https';
-import fs from 'fs';
 
-//  privatekey and certificate path :/var/www/html/
-var pk = fs.readFileSync('privatekey.pem'),
-    pc = fs.readFileSync('certificate.pem');
-var opts = {
-    key: pk,
-    cert: pc
-};
-
-var server = https.createServer(opts);
-
-*/
-
-
-// configure express
-//app.set('port', process.env.PORT || 80);
-//app.set('port', process.env.SSLPORT || 443);
 app.use(express.static(__dirname + '/project'));
 
 //amormaid_bot
@@ -82,20 +52,7 @@ var twitter = new Twit({
 
 var stream;
 let  settimeout_id;
-/*
-function handler (req, res) {
-  fs.readFile(__dirname + '/index.html',
-  function (err, data) {
-    if (err) {
-      res.writeHead(500);
-      return res.end('Error loading index.html');
-    }
 
-    res.writeHead(200);
-    res.end(data);
-  });
-}
-*/
 function io_socket(socket) {
     var tweetPayload = [];
     // stream  turn on  and  turn off  at  61 seconds later
