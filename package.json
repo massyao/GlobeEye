@@ -8,7 +8,15 @@
 		"url": "http://globe-eye.cf"
 	},
 	"license": "MIT",
+	"scripts": {
+		"start": "node app.js"
+	},
 	"dependencies": {
-
+		"compress": "^0.99.0",
+		"cors": "^2.8.4",
+		"express": "^4.16.3",
+		"json": "^9.0.6",
+		"socket.io": "^2.1.0",
+		"twit": "^2.2.9"
 	}
 }
