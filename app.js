@@ -14,8 +14,8 @@ const  json = require('json');
 //const server = require('http').createServer(app);
 const  http = require('http');
 const  https = require('https');
-const  privateKey  = fs.readFileSync('./privatekey.pem', 'utf8');
-const  certificate = fs.readFileSync('./certificate.pem', 'utf8');
+const  privateKey  = fs.readFileSync('./cert/privatekey.pem', 'utf8');
+const  certificate = fs.readFileSync('./cert/certificate.pem', 'utf8');
 const  credentials = {key: privateKey, cert: certificate};
 const  httpServer = http.createServer(app);
 const  httpsServer = https.createServer(credentials, app);
@@ -38,7 +38,7 @@ httpsServer.listen(SSLPORT, function() {
     console.log('HTTPS Server is running on:  ', SSLPORT);
 });
 
-
+app.use(cors());
 app.use(express.static(__dirname + '/project'));
 
 //amormaid_bot

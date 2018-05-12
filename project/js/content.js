@@ -327,7 +327,8 @@ animation();
         
         //  
 		//var url = window.location.href;
-        var url = window.location.protocol + '//67.218.144.152';
+        var url = window.location.protocol +"//"+ window.location.host;
+
 		var socket = io.connect(url);
 		socket.emit('tweets_request', { 'new': 'data_request !' });
 		socket.on('tweets_response',function(data){

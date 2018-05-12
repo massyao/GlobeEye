@@ -1,1 +1,1 @@
-cd /home/project/GlobeEye && node app.js &
+cd /home/project/GlobeEye && (node app.js &)

@@ -1,0 +1,17 @@
+apt-get update;
+
+apt-get install nginx;
+
+wget node-link;
+
+tar -xvJf **.tar.xz
+
+export NODE_HOME=/home/node 
+export PATH=$NODE_HOME/bin:$PATH
+
+git clone https://github/massyao/GlobeEye.git
+
+npm install 
+npm start
+
+nohup /home/project/GlobeEye/run.sh &
