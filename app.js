@@ -1,30 +1,30 @@
 'use strict';
 const  express = require('express');
-const  debug = require('debug')('main-index');
-const  path = require('path');
+// const  debug = require('debug')('main-index');
+// const  path = require('path');
 const  app = express();
 const  Twit = require('twit');
 const  cors = require('cors');
-const  fs = require('fs');
-const  compress = require('compress');
-const  json = require('json');
+// const  fs = require('fs');
+// const  compress = require('compress');
+// const  json = require('json');
 
 //const  methodOverride = require('methodOverride');
 //const  urlencoded = require('urlencoded');
 //const server = require('http').createServer(app);
 const  http = require('http');
-const  https = require('https');
-const  privateKey  = fs.readFileSync('./cert/privatekey.pem', 'utf8');
-const  certificate = fs.readFileSync('./cert/certificate.pem', 'utf8');
-const  credentials = {key: privateKey, cert: certificate};
+// const  https = require('https');
+// const  privateKey  = fs.readFileSync('./cert/privatekey.pem', 'utf8');
+// const  certificate = fs.readFileSync('./cert/certificate.pem', 'utf8');
+// const  credentials = {key: privateKey, cert: certificate};
 const  httpServer = http.createServer(app);
-const  httpsServer = https.createServer(credentials, app);
+// const  httpsServer = https.createServer(credentials, app);
 //const io = require('socket.io')(server);
 const io = require('socket.io')(httpServer);
-const ios = require('socket.io')(httpsServer);
+// const ios = require('socket.io')(httpsServer);
 
 const PORT = 1080;
-const SSLPORT = 1443;
+// const SSLPORT = 1443;
 
 var  tweet_stream_staus = false;
 //var  socket_staus = false ;
@@ -34,9 +34,9 @@ httpServer.listen(PORT, function() {
     console.log('HTTP Server is running on:  ', PORT);
 });
 
-httpsServer.listen(SSLPORT, function() {
-    console.log('HTTPS Server is running on:  ', SSLPORT);
-});
+// httpsServer.listen(SSLPORT, function() {
+//     console.log('HTTPS Server is running on:  ', SSLPORT);
+// });
 
 app.use(cors());
 app.use(express.static(__dirname + '/project'));
@@ -98,7 +98,7 @@ function io_socket(socket) {
 }
 
 io.on('connection', io_socket);
-ios.on('connection', io_socket);
+// ios.on('connection', io_socket);
 
 io.on('disconnect',function(){
     stream.stop();
@@ -106,12 +106,14 @@ io.on('disconnect',function(){
     console.log("stream stop !");
 	console.log('socket disconnect ;');
 });
-ios.on('disconnect',function(){
-    stream.stop();
-    tweet_stream_staus = false;
-    console.log("stream stop !");
-	console.log('socket disconnect;');
-});
+
+// ios.on('disconnect',function(){
+//     stream.stop();
+//     tweet_stream_staus = false;
+//     console.log("stream stop !");
+// 	console.log('socket disconnect;');
+// });
+
 // START SERVER
 //server.listen(80);
 //console.log('listening on port', app.get('port'));
