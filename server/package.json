@@ -1,0 +1,18 @@
+{
+	"name": "GlobeEye",
+	"version": "1.0.0",
+	"description": "A geospatial representation of tweet data collected from the twitter stream api",
+	"author": {
+		"name": "massyao",
+		"email": "massyao@126.com",
+		"url": "http://globe-eye.cf"
+	},
+	"license": "MIT",
+	"scripts": {
+		"start": "node app.js"
+	},
+	"dependencies": {
+		"socket.io": "^3.1.1",
+		"twit": "^2.2.11"
+	}
+}
