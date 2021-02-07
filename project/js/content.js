@@ -227,7 +227,9 @@ define(function (require) {
 		//var url = window.location.href;
 		var url = window.location.protocol + "//" + window.location.host;
 
-		var socket = io.connect(url);
+		var socket = io(url,{
+			path: "/globeapi/"
+		});
 		socket.emit('tweets_request', { 'new': 'data_request !' });
 		socket.on('tweets_response', function (data) {
 			if (data && data.length > 0) {
